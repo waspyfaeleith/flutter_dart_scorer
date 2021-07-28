@@ -3,13 +3,13 @@ import 'Player.dart';
 import 'Throw.dart';
 
 class Match {
-  int sets;
-  int legsPerSet;
-  int startScore;
+  late int sets;
+  late int legsPerSet;
+  late int startScore;
   var players;
-  Player setThrower;
-  Player legThrower;
-  Game game;
+  late Player setThrower;
+  late Player legThrower;
+  late Game game;
 
   Match(Player player1, Player player2, int sets, int legsPerSet, int startScore) {
 
@@ -69,14 +69,14 @@ class Match {
   }
 
   void turn(Player player) {
-
-    Throw playerThrow = new Throw(playerThrowScore);
-    while (!playerThrow.isValid()) {
-      // TODO: GET PLAYER SCORE FROM UI
-      //playerThrow = new Throw(playerThrowScore);
-    }
-
-    player.throwDarts(playerThrow);
+    // TODO: GET PLAYER SCORE FROM UI
+    // Throw playerThrow = new Throw(playerThrowScore);
+    // while (!playerThrow.isValid()) {
+    //
+    //   playerThrow = new Throw(playerThrowScore);
+    // }
+    //
+    // player.throwDarts(playerThrow);
   }
 
   void legWon() {

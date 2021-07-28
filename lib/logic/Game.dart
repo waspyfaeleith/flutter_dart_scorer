@@ -1,12 +1,12 @@
 import 'Player.dart';
 
 class Game {
-  Player player1;
-  Player player2;
-  Player thrower;
-  int startScore;
-  int sets;
-  int legsPerSet;
+  late Player player1;
+  late Player player2;
+  late Player thrower;
+  late int startScore;
+  late int sets;
+  late int legsPerSet;
 
   Game(Player player1, Player player2, int startScore,
       int sets, int legsPerSet) {

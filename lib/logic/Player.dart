@@ -1,18 +1,16 @@
 import 'Throw.dart';
 
 class Player {
-  String name;
-  int currentScore;
-  int legsWon;
-  int setsWon;
+  late String name;
+  late int currentScore;
+  int legsWon = 0;
+  int setsWon = 0;
   var scores;
 
 
   Player(String name, int startScore) {
     this.name = name;
     this.currentScore = startScore;
-    this.legsWon = 0;
-    this.setsWon = 0;
     this.scores = [];
   }
 
