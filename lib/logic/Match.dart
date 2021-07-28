@@ -3,69 +3,69 @@ import 'Player.dart';
 import 'Throw.dart';
 
 class Match {
-  late int sets;
-  late int legsPerSet;
-  late int startScore;
-  var players;
-  late Player setThrower;
-  late Player legThrower;
-  late Game game;
+  late int _sets;
+  late int _legsPerSet;
+  late int _startScore;
+  var _players;
+  late Player _setThrower;
+  late Player _legThrower;
+  late Game _game;
 
   Match(Player player1, Player player2, int sets, int legsPerSet, int startScore) {
 
-    this.sets = sets;
-    this.legsPerSet = legsPerSet;
-    this.startScore = startScore;
-    this.players = [];
-    this.players.add(player1);
-    this.players.add(player2);
+    this._sets = sets;
+    this._legsPerSet = legsPerSet;
+    this._startScore = startScore;
+    this._players = [];
+    this._players.add(player1);
+    this._players.add(player2);
 
-    this.game = new Game(player1, player2, startScore, sets, legsPerSet);
+    this._game = new Game(player1, player2, startScore, sets, legsPerSet);
 
-    this.setThrower = player1;
-    this.legThrower = player1;
+    this._setThrower = player1;
+    this._legThrower = player1;
   }
 
   int setsNeededToWinMatch() {
-    return (this.sets ~/ 2) + 1;
+    return (this._sets ~/ 2) + 1;
   }
 
   int legsNeededToWinSet() {
-    return (this.legsPerSet ~/ 2) + 1;
+    return (this._legsPerSet ~/ 2) + 1;
   }
 
   bool setWon() {
-    if ((game.player1.legsWon == legsNeededToWinSet()) ||
-        (game.player2.legsWon == legsNeededToWinSet())) {
-      game.winner()?.setsWon++;
+    if ((_game.player1.legsWon == legsNeededToWinSet()) ||
+        (_game.player2.legsWon == legsNeededToWinSet())) {
+      _game.winner()?.setsWon++;
       return true;
     }
     return false;
   }
 
   bool matchWon() {
-    return ((game.player1.setsWon == setsNeededToWinMatch()) ||
-        (game.player2.setsWon == setsNeededToWinMatch()));
+    return ((_game.player1.setsWon == this.setsNeededToWinMatch()) ||
+        (_game.player2.setsWon == this.setsNeededToWinMatch()));
   }
 
   void newSet() {
-    game.player1.legsWon = 0;
-    game.player2.legsWon = 0;
-    newGame();
-    game.thrower = switchThrower(setThrower);
-    this.setThrower = game.thrower;
+    _game.player1.legsWon = 0;
+    _game.player2.legsWon = 0;
+    this.newGame();
+    _game.thrower = switchThrower(_setThrower);
+    this._setThrower = _game.thrower;
   }
 
   newGame() {
-    game.player1.resetScores(this.startScore);
-    game.player2.resetScores(this.startScore);
-    game = new Game(this.players[0], this.players[1] , this.startScore, this.sets, this.legsPerSet);
+    _game.player1.resetScores(this._startScore);
+    _game.player2.resetScores(this._startScore);
+    _game = new Game(this._players[0], this._players[1] , this._startScore, this._sets, this._legsPerSet);
   }
 
   void newLeg() {
     this.newGame();
-    game.thrower = this.switchThrower(legThrower);
-    legThrower = game.thrower;
+    _game.thrower = this.switchThrower(_legThrower);
+    _legThrower = _game.thrower;
   }
 
   void turn(Player player) {
@@ -80,7 +80,7 @@ class Match {
   }
 
   void legWon() {
-    game.winner()?.legsWon++;
+    _game.winner()?.legsWon++;
     if (setWon()) {
       if (matchWon()) {
         // TODO: DISPLAY MATCH WINNER;
@@ -105,17 +105,17 @@ class Match {
   }
 
   void playLeg() {
-    while (!game.gameWon()) {
-      this.turn(game.thrower);
-      this.game.changeThrower();
+    while (!_game.gameWon()) {
+      this.turn(_game.thrower);
+      this._game.changeThrower();
     }
   }
 
   Player switchThrower(Player thrower) {
-    if (thrower == game.player1) {
-      thrower = game.player2;
+    if (thrower == _game.player1) {
+      thrower = _game.player2;
     } else {
-      thrower = game.player1;
+      thrower = _game.player1;
     }
     return thrower;
   }
