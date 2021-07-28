@@ -12,20 +12,20 @@ void main() {
 
   group('Game', () {
     test('start score is set', () {
-      expect(501, game.startScore);
+      expect(game.startScore, 501);
     });
 
     test('player 1 to throw first', () {
-      expect(player1, game.thrower);
+      expect(game.thrower, player1);
     });
 
     test('switch thrower to player2', () {
       game.changeThrower();
-      expect(player2, game.thrower);
+      expect(game.thrower, player2);
     });
 
     test('game has not yet been won', () {
-      expect(false, game.gameWon());
+      expect(game.gameWon(), false);
     });
 
     test('game has been won', () {
