@@ -8,8 +8,15 @@ class Game {
   int sets;
   int legsPerSet;
 
-  Game(this.player1, this.player2, this.thrower, this.startScore,
-      this.sets, this.legsPerSet);
+  Game(Player player1, Player player2, int startScore,
+      int sets, int legsPerSet) {
+    this.player1 = player1;
+    this.player2 = player2;
+    this.thrower = player1;
+    this.startScore = startScore;
+    this.sets = sets;
+    this.legsPerSet = legsPerSet;
+  }
 
   void changeThrower() {
     if (this.thrower == this.player1) {
