@@ -47,52 +47,50 @@ void main() {
       expect(41, player.currentScore);
     });
 
-    test('player throws winning score ', () {
+    test('player throws winning score', () {
       final Player player = new Player("Jack", 41);
       Throw t = new Throw(41);
       expect(true, player.isWinningScore(t));
       expect(0, player.currentScore);
     });
 
-    test('player does not throw winning score ', () {
+    test('player does not throw winning score', () {
       final Player player = new Player("Jack", 100);
       Throw t = new Throw(41);
       expect(false, player.isWinningScore(t));
     });
 
-    test('player throws bust score does not change ', () {
+    test('player throws bust score does not change', () {
       final Player player = new Player("Jack", 40);
       Throw t = new Throw(41);
       player.throwDarts(t);
       expect(40, player.currentScore);
     });
 
-    test('player on a finish with score 164 ', () {
+    test('player on a finish with score 164', () {
       final Player player = new Player("Jack", 164);
       expect(true, player.isOnAFinish());
     });
 
-    test('player on a finish with score 158 ', () {
+    test('player on a finish with score 158', () {
       final Player player = new Player("Jack", 158);
       expect(true, player.isOnAFinish());
     });
 
-    test('player on a finish with score 138 ', () {
+    test('player on a finish with score 138', () {
       final Player player = new Player("Jack", 138);
       expect(true, player.isOnAFinish());
     });
 
-    test('player is not on a finish with score 159 ', () {
+    test('player is not on a finish with score 159', () {
       final Player player = new Player("Jack", 159);
       expect(false, player.isOnAFinish());
     });
 
-    test('player is not on a finish with score 162 ', () {
+    test('player is not on a finish with score 162', () {
       final Player player = new Player("Jack", 162);
       expect(false, player.isOnAFinish());
     });
-
-
 
   });
 }
