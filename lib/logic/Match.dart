@@ -26,6 +26,13 @@ class Match {
     this._legThrower = player1;
   }
 
+
+  Game get game => _game;
+
+  Player get setThrower => _setThrower;
+
+  Player get legThrower => _legThrower;
+
   int setsNeededToWinMatch() {
     return (this._sets ~/ 2) + 1;
   }
@@ -35,9 +42,10 @@ class Match {
   }
 
   bool setWon() {
-    if ((_game.player1.legsWon == legsNeededToWinSet()) ||
-        (_game.player2.legsWon == legsNeededToWinSet())) {
-      _game.winner()?.setsWon++;
+    if ((this._game.player1.legsWon == legsNeededToWinSet()) ||
+        (this._game.player2.legsWon == legsNeededToWinSet())) {
+      this._game.winner()?.setsWon++;
+      this.newSet();
       return true;
     }
     return false;
