@@ -20,12 +20,24 @@ class _GameScreenState extends State<GameScreen> {
         children: [
           Column(
             children: [
-              Text(widget.match.players[0].name)
+              Text('${widget.match.players[0].legsWon}'),
+              Text('${widget.match.players[0].setsWon}'),
+              Text('${widget.match.players[0].name}'),
+              Text('${widget.match.players[0].currentScore}')
             ],
           ),
           Column(
             children: [
-              Text(widget.match.players[1].name)
+              Text("Legs"),
+              Text("Sets")
+            ],
+          ),
+          Column(
+            children: [
+              Text('${widget.match.players[1].legsWon}'),
+              Text('${widget.match.players[1].setsWon}'),
+              Text('${widget.match.players[1].name}'),
+              Text('${widget.match.players[1].currentScore}')
             ],)
         ],
       ),
