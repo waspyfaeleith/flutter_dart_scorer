@@ -1,51 +1,52 @@
 import 'package:flutter/material.dart';
 
+import 'components/player_name_input.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(DartScorer());
 }
 
-class MyApp extends StatelessWidget {
+class DartScorer extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Simple Dart Scorer',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: "Let's play darts!!!"),
+      home: HomePage(title: "Let's play darts!!!"),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+class HomePage extends StatefulWidget {
+  HomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
-
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
+
+  String player1 = "Player 1";
+  String player2 = "Player 2";
+  int startScore = 501;
+  int sets = 3;
+  int legsPerSet = 5;
+
+  void updatePlayer1(text) {
+      setState(() {
+        player1 = text;
+      });
+  }
+
+  void updatePlayer2(text) {
+    setState(() {
+      player2 = text;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,12 +57,115 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
+          child: Column(children: <Widget>[
+            // PlayerNameInput(player1, updatePlayer1),
+            // PlayerNameInput(player2, updatePlayer2),
+            Row(
+              children: [
+            Expanded(
+                //margin: EdgeInsets.all(20),
+                child:
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Player/Team 1',
+                    ),
+                    onChanged: (text) {
+                      setState(() {
+                        player1 = text;
+                      });
+                    },
+                  ),
+                )
+            ),
+                Expanded(
+                    //margin: EdgeInsets.all(20),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Player/Team 2',
+                        ),
+                        onChanged: (text) {
+                          setState(() {
+                            player2 = text;
+                          });
+                        },
+                      ),
+                    )),
+              ],
+            ),
+            Row(
+              children: [
+                DropdownButton(
+                  icon: const Icon(Icons.arrow_downward),
+                  onChanged: (int? newValue) {
+                    setState(() {
+                      startScore = newValue!;
+                    });
+                  },
+                  items: <int>[301, 501, 701]
+                      .map<DropdownMenuItem<int>>((int value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      child: Text('${value}'),
+                    );
+                  }).toList(),
+                ),
+                DropdownButton(
+                  icon: const Icon(Icons.arrow_downward),
+                  onChanged: (int? newValue) {
+                    setState(() {
+                      sets = newValue!;
+                    });
+                  },
+                  items: <int>[1, 3, 5, 7, 9, 11, 13]
+                      .map<DropdownMenuItem<int>>((int value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      child: Text('${value}'),
+                    );
+                  }).toList(),
+                ),
+                DropdownButton(
+                  icon: const Icon(Icons.arrow_downward),
+                  onChanged: (int? newValue) {
+                    setState(() {
+                      legsPerSet = newValue!;
+                    });
+                  },
+                  items: <int>[1, 3, 5, 7]
+                      .map<DropdownMenuItem<int>>((int value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      child: Text('${value}'),
+                    );
+                  }).toList(),
+                ),
 
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
+              ]
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Text(player1 + " vs " + player2),
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Text("${startScore} start "),
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Text("Best of ${sets} sets "),
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Text("Best of ${legsPerSet} legs per set "),
+            )
+          ],
+          ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
