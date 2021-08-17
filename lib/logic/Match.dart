@@ -33,6 +33,8 @@ class Match {
 
   Player get legThrower => _legThrower;
 
+  get players => _players;
+
   int setsNeededToWinMatch() {
     return (this._sets ~/ 2) + 1;
   }

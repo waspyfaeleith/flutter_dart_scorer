@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dart_scorer/game_screen.dart';
 
 import 'components/player_name_input.dart';
+import 'logic/Player.dart';
+import 'logic/Match.dart';
 
 void main() {
   runApp(DartScorer());
 }
 
 class DartScorer extends StatelessWidget {
+  static String id = 'home_screen';
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -30,21 +35,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  String player1 = "Player 1";
-  String player2 = "Player 2";
+  String player1Name = "Player 1";
+  String player2Name = "Player 2";
   int startScore = 501;
   int sets = 3;
   int legsPerSet = 5;
 
   void updatePlayer1(text) {
       setState(() {
-        player1 = text;
+        player1Name = text;
       });
   }
 
   void updatePlayer2(text) {
     setState(() {
-      player2 = text;
+      player2Name = text;
     });
   }
 
@@ -74,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onChanged: (text) {
                       setState(() {
-                        player1 = text;
+                        player1Name = text;
                       });
                     },
                   ),
@@ -91,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         onChanged: (text) {
                           setState(() {
-                            player2 = text;
+                            player2Name = text;
                           });
                         },
                       ),
@@ -150,7 +155,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Container(
               margin: EdgeInsets.all(20),
-              child: Text(player1 + " vs " + player2),
+              child: Text(player1Name + " vs " + player2Name),
             ),
             Container(
               margin: EdgeInsets.all(20),
@@ -163,7 +168,27 @@ class _HomePageState extends State<HomePage> {
             Container(
               margin: EdgeInsets.all(20),
               child: Text("Best of ${legsPerSet} legs per set "),
-            )
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              child: MaterialButton(
+                child: Text('Start Match'),
+                onPressed: () {
+                  print("Game On!!!!");
+                  Player player1 = new Player(player1Name, startScore);
+                  Player player2 = new Player(player2Name, startScore);
+                  Match match = new Match( player1, player2, 7, 5, startScore);
+                  //Navigator.pushNamed(context, GameScreen.id);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GameScreen(match: match)
+                    ),
+                  );
+
+                },
+              ),
+            ),
           ],
           ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
