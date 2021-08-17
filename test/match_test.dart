@@ -10,7 +10,6 @@ void main() {
     final Player player2 = new Player("Eric", startScore);
     Match match = new Match(player1, player2, 7, 5, startScore);
 
-
     test('sets needed to win match', () {
       expect(match.setsNeededToWinMatch(), 4);
     });
@@ -37,8 +36,5 @@ void main() {
 
       expect(match.matchWon(), true);
     });
-
-
-
   });
 }
