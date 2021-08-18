@@ -10,6 +10,7 @@ class Match {
   late Player _setThrower;
   late Player _legThrower;
   late Game _game;
+  late String _message;
 
   Match(Player player1, Player player2, int sets, int legsPerSet, int startScore) {
 
@@ -24,6 +25,7 @@ class Match {
 
     this._setThrower = player1;
     this._legThrower = player1;
+    this._message = "${this._legThrower} to throw";
   }
 
 
@@ -34,6 +36,8 @@ class Match {
   Player get legThrower => _legThrower;
 
   get players => _players;
+
+  String get message => _message;
 
   int setsNeededToWinMatch() {
     return (this._sets ~/ 2) + 1;
@@ -78,32 +82,40 @@ class Match {
     _legThrower = _game.thrower;
   }
 
-  void turn(Player player) {
-    // TODO: GET PLAYER SCORE FROM UI
-    // Throw playerThrow = new Throw(playerThrowScore);
-    // while (!playerThrow.isValid()) {
-    //
-    //   playerThrow = new Throw(playerThrowScore);
-    // }
-    //
-    // player.throwDarts(playerThrow);
+  void turn(Player player, int score) {
+    Throw playerThrow = new Throw(score);
+    if (playerThrow.isValid()) {
+      if (player.isBust(playerThrow)) {
+        this._message = "Bust!";
+      }
+      else {
+        player.throwDarts(playerThrow);
+      }
+      this._game.changeThrower();
+    } else {
+      this._message = "Invalid Score Entered!";
+    }
   }
 
   void legWon() {
     _game.winner()?.legsWon++;
     if (setWon()) {
       if (matchWon()) {
-        // TODO: DISPLAY MATCH WINNER;
+        _gameWon("match");
         return;
       } else {
-        // TODO: DISPLAY SET WINNER;
+        _gameWon("set");
         newSet();
         return;
       }
     } else {
-      //TODO: DISPLAY LEG WINNER;
+      _gameWon("leg");
       newLeg();
     }
+  }
+
+  void _gameWon(String msg) {
+    this._message = "Game Shot, and the " + msg;
   }
 
   void play() {
@@ -115,8 +127,7 @@ class Match {
   }
 
   void playLeg() {
-    while (!_game.gameWon()) {
-      this.turn(_game.thrower);
+    while (!_game.isWon()) {
       this._game.changeThrower();
     }
   }
@@ -128,5 +139,33 @@ class Match {
       thrower = _game.player1;
     }
     return thrower;
+  }
+
+  void processScore(int score)
+  {
+    if (matchWon())
+    {
+      if (!this._game.isWon())
+      {
+        this.turn(this._game.thrower, score);
+        //this.game.changeThrower();
+        if (game.isWon())
+        {
+          legWon();
+        }
+        else
+        {
+          //this.game.changeThrower();
+          if (this._game.thrower.isOnAFinish())
+          {
+            this._message = "${this._game.thrower.name}, you require ${this._game.thrower.currentScore}";
+          }
+          else
+          {
+            this._message = this._game.thrower.name + " to throw";
+          }
+        }
+      }
+    }
   }
 }

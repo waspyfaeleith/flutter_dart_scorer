@@ -62,7 +62,8 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-          child: Column(children: <Widget>[
+          child: Column(
+            children: <Widget>[
             // PlayerNameInput(player1, updatePlayer1),
             // PlayerNameInput(player2, updatePlayer2),
             Row(

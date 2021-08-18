@@ -41,7 +41,7 @@ class Game {
     }
   }
 
-  bool gameWon() {
+  bool isWon() {
     return ((_player1.currentScore == 0) || (_player2.currentScore == 0));
   }
 

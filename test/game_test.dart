@@ -25,7 +25,7 @@ void main() {
     });
 
     test('game has not yet been won', () {
-      expect(game.gameWon(), false);
+      expect(game.isWon(), false);
     });
 
     test('game has been won', () {
@@ -33,7 +33,7 @@ void main() {
       Game winningGame = new Game(player, player2, 101, 3, 3);
       winningGame.player1.throwDarts(new Throw(101));
 
-      expect(true, winningGame.gameWon());
+      expect(true, winningGame.isWon());
     });
 
 
