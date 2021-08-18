@@ -140,25 +140,18 @@ class Match {
     return thrower;
   }
 
-  void processScore(int score)
-  {
-    if (!matchWon())
-    {
-      if (!this._game.isWon())
-      {
+  void processScore(int score) {
+    if (!matchWon()) {
+      if (!this._game.isWon()) {
         this.turn(this._game.thrower, score);
-        if (this._game.isWon())
-        {
+        if (this._game.isWon()) {
           legWon();
         }
-        else
-        {
-          if (this._game.thrower.isOnAFinish())
-          {
+        else {
+          if (this._game.thrower.isOnAFinish()) {
             this._message = "${this._game.thrower.name}, you require ${this._game.thrower.currentScore}";
           }
-          else
-          {
+          else {
             this._message = this._game.thrower.name + " to throw";
           }
         }
