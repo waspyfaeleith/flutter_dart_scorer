@@ -4,7 +4,7 @@ import 'logic/Match.dart';
 class GameScreen extends StatefulWidget {
   static String id = 'game_screen';
 
-  final Match match;
+  Match match;
 
   GameScreen({Key? key, required this.match}) : super(key: key);
 
@@ -13,6 +13,13 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+
+  late Match match;
+
+  void initState() {
+    match = widget.match;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,10 +27,10 @@ class _GameScreenState extends State<GameScreen> {
         children: [
           Column(
             children: [
-              Text('${widget.match.players[0].legsWon}'),
-              Text('${widget.match.players[0].setsWon}'),
-              Text('${widget.match.players[0].name}'),
-              Text('${widget.match.players[0].currentScore}')
+              Text('${match.players[0].legsWon}'),
+              Text('${match.players[0].setsWon}'),
+              Text('${match.players[0].name}'),
+              Text('${match.players[0].currentScore}')
             ],
           ),
           Column(
@@ -34,10 +41,10 @@ class _GameScreenState extends State<GameScreen> {
           ),
           Column(
             children: [
-              Text('${widget.match.players[1].legsWon}'),
-              Text('${widget.match.players[1].setsWon}'),
-              Text('${widget.match.players[1].name}'),
-              Text('${widget.match.players[1].currentScore}')
+              Text('${match.players[1].legsWon}'),
+              Text('${match.players[1].setsWon}'),
+              Text('${match.players[1].name}'),
+              Text('${match.players[1].currentScore}')
             ],)
         ],
       ),
