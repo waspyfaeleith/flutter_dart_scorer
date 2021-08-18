@@ -115,7 +115,7 @@ class Match {
   }
 
   void _gameWon(String msg) {
-    this._message = "Game Shot, and the " + msg;
+    this._message = "Game Shot, and the ${msg} to ${this.game.winner()?.name}";
   }
 
   void play() {
@@ -147,7 +147,7 @@ class Match {
       if (!this._game.isWon())
       {
         this.turn(this._game.thrower, score);
-        if (game.isWon())
+        if (this._game.isWon())
         {
           legWon();
         }
