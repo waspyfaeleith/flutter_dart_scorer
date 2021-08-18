@@ -76,7 +76,7 @@ class _GameScreenState extends State<GameScreen> {
                   children: [
                     Column(
                       children: [
-                        Text(player1SetsWonText),
+                        Text(player1LegsWonText),
                         Text(player1SetsWonText),
                         Text('${match.game.player1.name}'),
                         Text(player1CurrentScoreText),
@@ -90,7 +90,7 @@ class _GameScreenState extends State<GameScreen> {
                     ),
                     Column(
                       children: [
-                        Text(player2SetsWonText),
+                        Text(player2LegsWonText),
                         Text(player2SetsWonText),
                         Text('${match.game.player2.name}'),
                         Text(player2CurrentScoreText),
