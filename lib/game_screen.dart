@@ -17,19 +17,48 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
 
   late Match match;
+  late String player1NameText = "";
+  late String player2NameText = "";
+  late String player1SetsWonText = "";
+  late String player2SetsWonText = "";
+  late String player1LegsWonText = "";
+  late String player2LegsWonText = "";
+  late String player1CurrentScoreText = "";
+  late String player2CurrentScoreText = "";
+  late String messageText = "";
+
+
   final controller =  TextEditingController();
 
   void initState() {
     match = widget.match;
+    updateTextFields();
     //match.play();
   }
 
-  void throwDarts(int score) {
+  void updateTextFields() {
     setState(() {
-      if (!match.matchWon())
-      {
-        match.processScore(score);
-      }
+      player1SetsWonText = "${match.game.player1.setsWon}";
+      player1LegsWonText = "${match.game.player1.legsWon}";
+      player1CurrentScoreText = "${match.game.player1.currentScore}";
+
+      player2SetsWonText = "${match.game.player2.setsWon}";
+      player2LegsWonText = "${match.game.player2.legsWon}";
+      player2CurrentScoreText = "${match.game.player2.currentScore}";
+
+      messageText = match.message;
+    });
+
+
+  }
+  void throwDarts(int score) {
+    controller.clear();
+    if (!match.matchWon())
+    {
+      match.processScore(score);
+    }
+    setState(() {
+      updateTextFields();
     });
 
   }
@@ -47,10 +76,10 @@ class _GameScreenState extends State<GameScreen> {
                   children: [
                     Column(
                       children: [
-                        Text('${match.players[0].legsWon}'),
-                        Text('${match.players[0].setsWon}'),
-                        Text('${match.players[0].name}'),
-                        Text('${match.players[0].currentScore}')
+                        Text(player1SetsWonText),
+                        Text(player1SetsWonText),
+                        Text('${match.game.player1.name}'),
+                        Text(player1CurrentScoreText),
                       ],
                     ),
                     Column(
@@ -61,16 +90,17 @@ class _GameScreenState extends State<GameScreen> {
                     ),
                     Column(
                       children: [
-                        Text('${match.players[1].legsWon}'),
-                        Text('${match.players[1].setsWon}'),
-                        Text('${match.players[1].name}'),
-                        Text('${match.players[1].currentScore}')
+                        Text(player2SetsWonText),
+                        Text(player2SetsWonText),
+                        Text('${match.game.player2.name}'),
+                        Text(player2CurrentScoreText),
                       ],)
                   ],
                 ),
               ),
               Row(
                 children: [
+                  Text(match.message),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

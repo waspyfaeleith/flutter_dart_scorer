@@ -43,7 +43,7 @@ class Player {
 
   bool isBust(Throw t)
   {
-    if ((t.score > this._currentScore) || ((this._currentScore - t.score) == 1)) {
+    if ((!isOnAFinish() && t.score == this._currentScore) || (t.score > this._currentScore) || ((this._currentScore - t.score) == 1)) {
       return true;
     }
     return false;

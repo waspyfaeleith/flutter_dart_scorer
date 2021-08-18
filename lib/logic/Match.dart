@@ -25,7 +25,7 @@ class Match {
 
     this._setThrower = player1;
     this._legThrower = player1;
-    this._message = "${this._legThrower} to throw";
+    this._message = "${this._legThrower.name} to throw";
   }
 
 
@@ -119,7 +119,6 @@ class Match {
   }
 
   void play() {
-
     while (matchWon() == false) {
       playLeg();
       legWon();
@@ -143,19 +142,17 @@ class Match {
 
   void processScore(int score)
   {
-    if (matchWon())
+    if (!matchWon())
     {
       if (!this._game.isWon())
       {
         this.turn(this._game.thrower, score);
-        //this.game.changeThrower();
         if (game.isWon())
         {
           legWon();
         }
         else
         {
-          //this.game.changeThrower();
           if (this._game.thrower.isOnAFinish())
           {
             this._message = "${this._game.thrower.name}, you require ${this._game.thrower.currentScore}";
