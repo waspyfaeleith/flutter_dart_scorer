@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'logic/Match.dart';
-import 'logic/Throw.dart';
 
 class GameScreen extends StatefulWidget {
   static String id = 'game_screen';
@@ -33,7 +32,6 @@ class _GameScreenState extends State<GameScreen> {
   void initState() {
     match = widget.match;
     updateTextFields();
-    //match.play();
   }
 
   void updateTextFields() {

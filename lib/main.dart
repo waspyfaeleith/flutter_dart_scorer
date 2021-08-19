@@ -178,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                   print("Game On!!!!");
                   Player player1 = new Player(player1Name, startScore);
                   Player player2 = new Player(player2Name, startScore);
-                  Match match = new Match( player1, player2, 7, 5, startScore);
+                  Match match = new Match( player1, player2, sets, legsPerSet, startScore);
                   //Navigator.pushNamed(context, GameScreen.id);
                   Navigator.push(
                     context,
