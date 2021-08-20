@@ -65,37 +65,42 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(
-                child: Row(
+              Row(
                   children: [
-                    Column(
-                      children: [
-                        Text(player1LegsWonText),
-                        Text(player1SetsWonText),
-                        Text('${match.game.player1.name}'),
-                        Text(player1CurrentScoreText),
-                      ],
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text(player1LegsWonText),
+                          Text(player1SetsWonText),
+                          Text('${match.game.player1.name}'),
+                          Text(player1CurrentScoreText),
+                        ],
+                      ),
                     ),
+                    Expanded(
+                    child:
                     Column(
                       children: [
                         Text("Legs"),
                         Text("Sets")
                       ],
                     ),
-                    Column(
+                    ),
+                    Expanded(
+                      child: Column(
                       children: [
                         Text(player2LegsWonText),
                         Text(player2SetsWonText),
                         Text('${match.game.player2.name}'),
                         Text(player2CurrentScoreText),
-                      ],)
+                      ],
+                        ),
+                    ),
                   ],
                 ),
-              ),
               Row(
                 children: [
                   Text(match.message),
@@ -122,7 +127,6 @@ class _GameScreenState extends State<GameScreen> {
                 ],
               ),
             ],
-          ),
         ),
       ),
     );
