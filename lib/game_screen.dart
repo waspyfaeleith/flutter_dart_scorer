@@ -85,7 +85,8 @@ class _GameScreenState extends State<GameScreen> {
                     Column(
                       children: [
                         Text("Legs"),
-                        Text("Sets")
+                        Text("Sets"),
+                        Text("V"),
                       ],
                     ),
                     ),
@@ -103,7 +104,15 @@ class _GameScreenState extends State<GameScreen> {
                 ),
               Row(
                 children: [
-                  Text(match.message),
+                  Center(
+                    child: Expanded(
+                        child: Text(match.message)
+                    ),
+                  ),
+                ]
+              ),
+              Row(
+                children: [
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -115,17 +124,23 @@ class _GameScreenState extends State<GameScreen> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    child: MaterialButton(
-                      child: Text('Submit Score'),
-                      onPressed: () {
-                        throwDarts(int.parse(controller.text));
-                      },
-                    )
-                  ),
                 ],
               ),
+              Row(
+                children: [
+                  Center(
+                    child: Container(
+                        margin: EdgeInsets.all(20),
+                        child: MaterialButton(
+                          child: Text('Submit Score'),
+                          onPressed: () {
+                            throwDarts(int.parse(controller.text));
+                          },
+                        )
+                    ),
+                  ),
+                ],
+              )
             ],
         ),
       ),
