@@ -73,43 +73,60 @@ class _GameScreenState extends State<GameScreen> {
                     Expanded(
                       child: Column(
                         children: [
-                          Text(player1LegsWonText),
-                          Text(player1SetsWonText),
-                          Text('${match.game.player1.name}'),
-                          Text(player1CurrentScoreText),
+                          Text(player1LegsWonText, style: TextStyle(fontSize: 25),),
+                          Text(player1SetsWonText, style: TextStyle(fontSize: 25),),
+                          Text(
+                              '${match.game.player1.name}',
+                              style: TextStyle(fontSize: 50),
+                          ),
+                          Text(
+                            player1CurrentScoreText,
+                            style: TextStyle(fontSize: 70),
+                          ),
                         ],
                       ),
                     ),
                     Expanded(
-                    child:
-                    Column(
-                      children: [
-                        Text("Legs"),
-                        Text("Sets"),
-                        Text("V"),
-                      ],
-                    ),
+                      child:
+                        Column(
+                          children: [
+                            Text("Legs", style: TextStyle(fontSize: 25),),
+                            Text("Sets", style: TextStyle(fontSize: 25),),
+                            Text("V", style: TextStyle(fontSize: 40),),
+                          ],
+                        ),
                     ),
                     Expanded(
                       child: Column(
                       children: [
-                        Text(player2LegsWonText),
-                        Text(player2SetsWonText),
-                        Text('${match.game.player2.name}'),
-                        Text(player2CurrentScoreText),
+                        Text(player2LegsWonText, style: TextStyle(fontSize: 25),),
+                        Text(player2SetsWonText, style: TextStyle(fontSize: 25),),
+                        Text(
+                            '${match.game.player2.name}',
+                             style: TextStyle(fontSize: 50),
+                        ),
+                        Text(
+                            player2CurrentScoreText,
+                            style: TextStyle(fontSize: 70),
+                        ),
                       ],
                         ),
                     ),
                   ],
                 ),
-              Row(
-                children: [
-                  Center(
-                    child: Expanded(
-                        child: Text(match.message)
-                    ),
-                  ),
-                ]
+              Center(
+                child: Row(
+                  children: [
+                    //Center(
+                    Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(match.message, style: TextStyle(fontSize: 40),),
+                          )
+                      ),
+                    //),
+                  ]
+                ),
               ),
               Row(
                 children: [
